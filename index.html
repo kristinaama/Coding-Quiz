@@ -1,34 +1,91 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
-    <link rel="stylesheet" href="Assets/CSS/style.css" />
-  </head>
+    <title>Coding Quiz Challenge</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="./Assets/css/style.css">
+  </head> 
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Password Generator</h1>
-      </header>
-      <div class="card">
-        <div class="card-header">
-          <h2>Generate a Password</h2>
-        </div>
-        <div class="card-body">
-          <textarea
-            readonly
-            id="password"
-            placeholder="Your Secure Password"
-            aria-label="Generated Password"
-          ></textarea>
-        </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
-        </div>
-      </div>
+  <section>
+    <div class="container intro">
+      <h1>Coding Quiz Challenge</h1>
+      <h2>Try to answer the following code-related questions within the time limit.</h2>
+      <h2>Keep in mind that incorrect answers will penalize your score/time by ten seconds!</h2>
+          <button class="start"> Start ▶ </button>
     </div>
-    <script src="Assets/JavaScript/script.js"></script>
+  </section>
+
+  <section>
+    <div class= "container timer">
+      <div class = "timer-text">
+      <div class="large-font timer-count"></div>
+      <h2>seconds remaining</h2>
+    </div>
+  </section>
+
+  <section class="quizcontainer container hide">
+    <div class= "hide" id="quiz">
+      <h1>Quiz</h1>
+    </div>
+
+    <div class="hide" id="question1">
+      <h2 class="question"></h2>
+      <button class="btn1"></button>
+      <button class="btn2"></button>
+      <button class="btn3"></button>
+      <button class="btn4"></button>
+      <h2 class="answer"></h2>
+    </div>
+
+    <div class="hide" id="question2">
+      <h2 class="question"></h2>
+      <button class="btn1"></button>
+      <button class="btn2"></button>
+      <button class="btn3"></button>
+      <button class="btn4"></button>
+      <h2 class="answer"></h2>
+    </div>
+
+    <div class="hide" id="question3">
+      <h2 class="question"></h2>
+      <button class="btn1"></button>
+      <button class="btn2"></button>
+      <button class="btn3"></button>
+      <button class="btn4"></button>
+      <h2 class="answer"></h2>
+    </div>
+
+    <div class="hide" id="question4">
+      <h2 class="question"></h2>
+      <button class="btn1"></button>
+      <button class="btn2"></button>
+      <button class="btn3"></button>
+      <button class="btn4"></button>
+      <h2 class="answer"></h2>
+    </div>
+
+    <div class="hide" id="question5">
+      <h2 class="question"></h2>
+      <button class="btn1"></button>
+      <button class="btn2"></button>
+      <button class="btn3"></button>
+      <button class="btn4"></button>
+      <h2 class="answer"></h2>
+    </div>
+
+    <div class="hide" id="end">
+      <h1>End Game!</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class= "container scores">
+      <h1>High Scores</h1>
+      <h2 class="score"></h2>
+    </div>
+  </section>
+    <script src="./Assets/js/script.js"></script>
   </body>
 </html>
