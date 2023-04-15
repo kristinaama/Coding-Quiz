@@ -28,7 +28,7 @@ var list = document.querySelector(".highscores");
 // The startGame function is called when the start button is clicked
 function startGame() {
   isWin = false;
-  timerCount = 60;
+  timerCount = 100;
   // Prevents start button from being clicked when round is in progress
   startButton.disabled = true;
   // Start the timer and quiz game
