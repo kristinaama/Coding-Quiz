@@ -2,14 +2,12 @@
 var startButton = document.querySelector(".start");
 var timerElement = document.querySelector(".timer-count");
 var scoreBtn = document.querySelector(".scorebtn");
-var isWin = false;
 var quizcontainer = document.querySelector(".quizcontainer");
 var timercontainer = document.querySelector(".timercontainer");
 var scorescontainer = document.querySelector(".scorescontainer");
 var hide = document.querySelector(".hide");
 var quiz = document.querySelector("#quiz");
 var end = document.querySelector("#end");
-var scoreCounter = "";
 var question = document.querySelector(".question");
 var btn1 = document.querySelector(".btn1");
 var btn2 = document.querySelector(".btn2");
@@ -21,30 +19,35 @@ var q2 = document.querySelector("#question2");
 var q3 = document.querySelector("#question3");
 var q4 = document.querySelector("#question4");
 var q5 = document.querySelector("#question5");
+var scoreCounter = "";
+var isWin = false;
+var scoreInput = document.querySelector(".scoreinput");
+var score = document.querySelector(".score");
+var list = document.querySelector(".highscores");
 
 // The startGame function is called when the start button is clicked
 function startGame() {
   isWin = false;
-  timerCount = 100;
+  timerCount = 60;
   // Prevents start button from being clicked when round is in progress
   startButton.disabled = true;
-  // Start the time and game
+  // Start the timer and quiz game
   startTimer()
   startQuiz()
 }
 
-// The loseGame function is called when timer reaches 0
+// The winGame function is called when timer reaches 0
 function winGame() {
   startButton.disabled = false;
   setScore()
 }
 
+// The setScore function stores the score count into the local storage
 function setScore() {
-  score.textContent = scoreCounter;
   localStorage.setItem("scoreCount", scoreCounter); 
 }
 
-// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
+// The setTimer function starts and stops the timer and triggers winGame function
 function startTimer() {
   // Sets timer
   timercontainer.setAttribute("class", "container");
@@ -57,12 +60,19 @@ function startTimer() {
         // Clears interval and stops timer
         clearInterval(timer);
         winGame();
+        endGame();
       }
     }
     // Tests if time has run out
     if (timerCount === 0) {
       // Clears interval
       clearInterval(timer);
+      winGame();
+      endGame();
+    }
+    if (timerCount <= 0) {
+      clearInterval(timer);
+      winGame();
       endGame();
     }
   }, 1000);
@@ -98,6 +108,7 @@ function question1() {
   btn4.value = "incorrect"
 }
 
+// The checkAnswer function will check if the button that was clicked is correct or incorrect
 function checkanswer(event) {
   if (event.target.value == "correct") {
     answer.textContent = " Correct!";
@@ -105,7 +116,7 @@ function checkanswer(event) {
   answer.textContent = " Incorrect!"
   timerCount = timerCount - 10;
   }
-
+// Move on to the next question
   if (questioncounter == 1) {
   question2()
   } else if (questioncounter == 2) {
@@ -175,30 +186,33 @@ function question5() {
   btn4.value = "correct"
 }
 
-var scoreInput = document.querySelector(".scoreinput");
-var score = document.querySelector(".score");
-var list = document.querySelector(".highscores");
-
+// Add an event listener to the Enter button
 scoreBtn.textContent = "Enter";
 scoreBtn.addEventListener("click",addScore);
 
-var highScores = JSON.parse(localStorage.getItem("highscores")) || []
+// Retrieve high score values from local storage or create an empty array
+var highScores = JSON.parse(localStorage.getItem("highscoresstorage")) || []
+
+// The addScore function creates an array for the initials inputted and score count
 function addScore() {
   var data = {
     initials: scoreInput.value,
     score: timerCount
   }
-  console.log(data)
+
+// Push the data into the local storage and set it
   highScores.push(data)
-  console.log(highScores)
-  localStorage.setItem("highscores", JSON.stringify(highScores))
+  localStorage.setItem("highscoresstorage", JSON.stringify(highScores))
+
+  // Create a new list item for each new high score
   for (let i = 0; i < highScores.length; i++) {
     var li = document.createElement("li")
-    li.textContent = "Initials: "+highScores[i].initials+" Score: "+highScores[i].score
+    li.textContent = "Initials: "+highScores[i].initials+"  Score: "+highScores[i].score
     list.appendChild(li)
   }
 }
 
+// Reveal the "End Game!" text
 function endGame() {
   scorescontainer.setAttribute("class", "container");
   q1.setAttribute("class", "hide");
