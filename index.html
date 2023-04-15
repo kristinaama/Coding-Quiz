@@ -18,17 +18,14 @@
   </section>
 
   <section>
-    <div class= "container timer">
-      <div class = "timer-text">
-      <div class="large-font timer-count"></div>
+    <div class= "timercontainer hide timer container">
+      <div class="timer-count"></div>
       <h2>seconds remaining</h2>
     </div>
   </section>
 
   <section class="quizcontainer container hide">
-    <div class= "hide" id="quiz">
-      <h1>Quiz</h1>
-    </div>
+    <div class= "hide" id="quiz"></div>
 
     <div class="hide" id="question1">
       <h2 class="question"></h2>
@@ -81,9 +78,14 @@
   </section>
 
   <section>
-    <div class= "container scores">
+    <div class= "hide scorescontainer container scores">
       <h1>High Scores</h1>
-      <h2 class="score"></h2>
+      <label>
+        Please input your initials:
+        <input class="scoreinput"></input>
+      </label>
+      <button class="scorebtn">Enter</button>
+      <ul class="highscores"></ul>
     </div>
   </section>
     <script src="./Assets/js/script.js"></script>

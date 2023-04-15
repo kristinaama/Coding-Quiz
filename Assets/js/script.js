@@ -1,46 +1,36 @@
+// Sets the global variables for the game
 var startButton = document.querySelector(".start");
 var timerElement = document.querySelector(".timer-count");
-var score = document.querySelector(".score");
+var scoreBtn = document.querySelector(".scorebtn");
 var isWin = false;
 var quizcontainer = document.querySelector(".quizcontainer");
+var timercontainer = document.querySelector(".timercontainer");
+var scorescontainer = document.querySelector(".scorescontainer");
 var hide = document.querySelector(".hide");
 var quiz = document.querySelector("#quiz");
 var end = document.querySelector("#end");
 var scoreCounter = "";
+var question = document.querySelector(".question");
+var btn1 = document.querySelector(".btn1");
+var btn2 = document.querySelector(".btn2");
+var btn3 = document.querySelector(".btn3");
+var btn4 = document.querySelector(".btn4");
+var answer = document.querySelector(".answer");
+var q1 = document.querySelector("#question1");
+var q2 = document.querySelector("#question2");
+var q3 = document.querySelector("#question3");
+var q4 = document.querySelector("#question4");
+var q5 = document.querySelector("#question5");
 
 // The startGame function is called when the start button is clicked
 function startGame() {
   isWin = false;
-  timerCount = 10;
+  timerCount = 100;
   // Prevents start button from being clicked when round is in progress
   startButton.disabled = true;
   // Start the time and game
   startTimer()
   startQuiz()
-}
-
-// The winGame function is called when the win condition is met
-function winGameCorrect() {
-  answer.textContent = "Correct! \n You've finished the quiz!";
-  startButton.disabled = false;
-  endGame();
-}
-
-function winGameIncorrect() {
-  answer.textContent = "Incorrect! \n You've finished the quiz!";
-  startButton.disabled = false;
-  endGame();
-}
-
-function endGame() {
-  q1.setAttribute("class", "hide");
-  q2.setAttribute("class", "hide");
-  q3.setAttribute("class", "hide");
-  q4.setAttribute("class", "hide");
-  q5.setAttribute("class", "hide");
-  quiz.setAttribute("class", "hide");
-  end.setAttribute("class", "");
-  isWin = true;
 }
 
 // The loseGame function is called when timer reaches 0
@@ -57,6 +47,7 @@ function setScore() {
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
 function startTimer() {
   // Sets timer
+  timercontainer.setAttribute("class", "container");
   timer = setInterval(function() {
     timerCount--;
     timerElement.textContent = timerCount;
@@ -80,19 +71,6 @@ function startTimer() {
 // Attach event listener to start button to call startGame function on click
 startButton.addEventListener("click", startGame);
 
-// Sets the global variables for the game
-var question = document.querySelector(".question");
-var btn1 = document.querySelector(".btn1");
-var btn2 = document.querySelector(".btn2");
-var btn3 = document.querySelector(".btn3");
-var btn4 = document.querySelector(".btn4");
-var answer = document.querySelector(".answer");
-var q1 = document.querySelector("#question1");
-var q2 = document.querySelector("#question2");
-var q3 = document.querySelector("#question3");
-var q4 = document.querySelector("#question4");
-var q5 = document.querySelector("#question5");
-
 // The startGame function runs the quiz questions
 function startQuiz() {
   quizcontainer.setAttribute("class", "container");
@@ -100,109 +78,135 @@ function startQuiz() {
   quiz.setAttribute("class", "");
   q1.setAttribute("class", "");
 }
+btn1.addEventListener("click", checkanswer)
+btn2.addEventListener("click", checkanswer)
+btn3.addEventListener("click", checkanswer)
+btn4.addEventListener("click", checkanswer)
+var questioncounter = 0;
 
 // Run Question 1 quiz question
 function question1() {
+  questioncounter++;
   question.textContent = "Commonly used data types DO NOT include:";
   btn1.textContent = "1. strings";
   btn2.textContent = "2. boolean";
   btn3.textContent = "3. alerts";
   btn4.textContent = "4. numbers";
-  btn1.addEventListener("click", incorrect1)
-  btn2.addEventListener("click", incorrect1)
-  btn3.addEventListener("click", correct1)
-  btn4.addEventListener("click", incorrect1)
+  btn1.value = "incorrect"
+  btn2.value = "incorrect"
+  btn3.value = "correct"
+  btn4.value = "incorrect"
 }
-function correct1() {
-  answer.textContent = " Correct!";
-  question2()
-}
-function incorrect1() {
+
+function checkanswer(event) {
+  if (event.target.value == "correct") {
+    answer.textContent = " Correct!";
+  } else {
   answer.textContent = " Incorrect!"
+  timerCount = timerCount - 10;
+  }
+
+  if (questioncounter == 1) {
   question2()
-}
+  } else if (questioncounter == 2) {
+  question3()
+  } else if (questioncounter == 3) {
+    question4()
+  } else if (questioncounter == 4) {
+    question5()
+  } else {
+    endGame()
+  }
+} 
 
 // Run Question 2 quiz question
 function question2() {
+  questioncounter++;
   question.textContent = "The condition in an if/else statement is enclosed within:";
   btn1.textContent = "1. quotes";
   btn2.textContent = "2. curly brackets";
   btn3.textContent = "3. parentheses";
   btn4.textContent = "4. square brackets";
-  document.querySelector('.btn1').addEventListener("click", incorrect2)
-  document.querySelector('.btn2').addEventListener("click", incorrect2)
-  document.querySelector('.btn3').addEventListener("click", correct2)
-  document.querySelector('.btn4').addEventListener("click", incorrect2)
-}
-function correct2() {
-  answer.textContent = " Correct!";
-  question3()
-}
-function incorrect2() {
-  answer.textContent = " Incorrect!";
-  question3()
+  btn1.value = "incorrect"
+  btn2.value = "incorrect"
+  btn3.value = "correct"
+  btn4.value = "incorrect"
 }
 
 // Run Question 3 quiz question
-answer.replace(answer, answer);
 function question3() {
+  questioncounter++;
   question.textContent = "Arrays in JavaScript can be used to store:";
   btn1.textContent = "1. numbers and strings";
   btn2.textContent = "2. other arrays";
   btn3.textContent = "3. booleans";
   btn4.textContent = "4. all of the above";
-  document.querySelector('.btn1').addEventListener("click", incorrect3)
-  document.querySelector('.btn2').addEventListener("click", incorrect3)
-  document.querySelector('.btn3').addEventListener("click", incorrect3)
-  document.querySelector('.btn4').addEventListener("click", correct3)
-}
-function correct3() {
-  answer.textContent = " Correct!";
-  question4()
-}
-function incorrect3() {
-  answer.textContent = " Incorrect!";
-  question4()
+  btn1.value = "incorrect"
+  btn2.value = "incorrect"
+  btn3.value = "incorrect"
+  btn4.value = "correct"
 }
 
 // Run Question 4 quiz question
 function question4() {
+  questioncounter++;
   question.textContent = "String values must be enclosed within ____ when being assigned to variables.";
   btn1.textContent = "1. commas";
   btn2.textContent = "2. curly brackets";
   btn3.textContent = "3. quotes";
   btn4.textContent = "4. parentheses";
-  document.querySelector('.btn1').addEventListener("click", incorrect4)
-  document.querySelector('.btn2').addEventListener("click", incorrect4)
-  document.querySelector('.btn3').addEventListener("click", correct4)
-  document.querySelector('.btn4').addEventListener("click", incorrect4)
-}
-function correct4() {
-  answer.textContent = " Correct!";
-  question5()
-}
-function incorrect4() {
-  answer.textContent = " Incorrect!";
-  question5()
+  btn1.value = "incorrect"
+  btn2.value = "incorrect"
+  btn3.value = "correct"
+  btn4.value = "incorrect"
 }
 
 // Run Question 5 quiz question
 function question5() {
+  questioncounter++;
   question.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
   btn1.textContent = "1. JavaScript";
   btn2.textContent = "2. terminal/bash";
   btn3.textContent = "3. for loops";
   btn4.textContent = "4. console log";
-  document.querySelector('.btn1').addEventListener("click", incorrect5)
-  document.querySelector('.btn2').addEventListener("click", incorrect5)
-  document.querySelector('.btn3').addEventListener("click", incorrect5)
-  document.querySelector('.btn4').addEventListener("click", correct5)
+  btn1.value = "incorrect"
+  btn2.value = "incorrect"
+  btn3.value = "incorrect"
+  btn4.value = "correct"
 }
-function correct5() {
-  answer.textContent = " Correct!";
-  winGameCorrect();
+
+var scoreInput = document.querySelector(".scoreinput");
+var score = document.querySelector(".score");
+var list = document.querySelector(".highscores");
+
+scoreBtn.textContent = "Enter";
+scoreBtn.addEventListener("click",addScore);
+
+var highScores = JSON.parse(localStorage.getItem("highscores")) || []
+function addScore() {
+  var data = {
+    initials: scoreInput.value,
+    score: timerCount
+  }
+  console.log(data)
+  highScores.push(data)
+  console.log(highScores)
+  localStorage.setItem("highscores", JSON.stringify(highScores))
+  for (let i = 0; i < highScores.length; i++) {
+    var li = document.createElement("li")
+    li.textContent = "Initials: "+highScores[i].initials+" Score: "+highScores[i].score
+    list.appendChild(li)
+  }
 }
-function incorrect5() {
-  answer.textContent = " Incorrect!";
-  winGameIncorrect();
+
+function endGame() {
+  scorescontainer.setAttribute("class", "container");
+  q1.setAttribute("class", "hide");
+  q2.setAttribute("class", "hide");
+  q3.setAttribute("class", "hide");
+  q4.setAttribute("class", "hide");
+  q5.setAttribute("class", "hide");
+  quiz.setAttribute("class", "hide");
+  end.setAttribute("class", "");
+  isWin = true;
 }

@@ -31,3 +31,11 @@ h2 {
 .wrapper {
   padding-bottom: 30px;
 }
+
+li {
+  list-style: none;
+}
+
+.timer-count {
+  font-size: 30px;
+}
