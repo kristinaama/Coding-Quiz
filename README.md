@@ -1,4 +1,4 @@
-# <CODING QUIZ>
+## Project: CODING QUIZ
 
 ## Description
 
