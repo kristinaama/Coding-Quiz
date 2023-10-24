@@ -18,7 +18,7 @@ THEN I can save my initials and score
 
 ## Installation
 
-The HTML, CSS, and JavaScript code can be downloaded via the Homework-04 folder on my Github page. It can also be viewed by visiting the following URL: https://kristinaama.github.io/Homework-04/
+The HTML, CSS, and JavaScript code can be downloaded via the Homework-04 folder on my Github page. It can also be viewed by visiting the following URL: https://kristinaama.github.io/Coding-Quiz/
 
 ## Usage
 
